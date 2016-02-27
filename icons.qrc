@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>sunflower.png</file>
+        <file>QWidgetStyle.txt</file>
+    </qresource>
+</RCC>
