@@ -13,6 +13,6 @@ void ThreadEmp::stop()
 
 void ThreadEmp::run()
 {
-    ExportXML exportXML;
-    exportXML.openImport();
+    //ExportXML exportXML;
+    //exportXML.openImport();
 }

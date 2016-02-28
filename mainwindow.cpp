@@ -2,7 +2,7 @@
 #include "ftpform.h"
 #include "threademp.h"
 #include "exportxml.h"
-#include "threademp.h"
+//#include "threademp.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -53,8 +53,8 @@ MainWindow::MainWindow(QWidget *parent)
 
     slotShowHide();
     //update.iniVersion();
-    ThreadEmp threadEmp;
-    threadEmp.start();
+   ExportXML exportXML;
+   exportXML.openImport(false);
 }
 
 MainWindow::~MainWindow()
@@ -91,52 +91,50 @@ void MainWindow::updateTime()
         timeLabel->setStyleSheet("QLCDNumber {"
                                  "color: darkblue;"
                                  "background-color: #FFF951;}");
-        ThreadEmp threadEmp;
-        threadEmp.start();
-        //ExportXML exportXML;
-        //exportXML.openImport();
+        ExportXML exportXML;
+        exportXML.openImport(true);
     }else if(currTime == "03:00:00"){
         timeLabel->setStyleSheet("QLCDNumber {"
                                  "color: darkblue;"
                                  "background-color: #FFF951;}");
-        ThreadEmp threadEmp;
-        threadEmp.start();
+        ExportXML exportXML;
+        exportXML.openImport(false);
     }else if(currTime == "06:00:00"){
         timeLabel->setStyleSheet("QLCDNumber {"
                                  "color: darkblue;"
                                  "background-color: #FFF951;}");
-        ThreadEmp threadEmp;
-        threadEmp.start();
+        ExportXML exportXML;
+        exportXML.openImport(false);
     }else if(currTime == "09:00:00"){
         timeLabel->setStyleSheet("QLCDNumber {"
                                  "color: darkblue;"
                                  "background-color: #FFF951;}");
-        ThreadEmp threadEmp;
-        threadEmp.start();
+        ExportXML exportXML;
+        exportXML.openImport(false);
     }else if(currTime == "12:00:00"){
         timeLabel->setStyleSheet("QLCDNumber {"
                                  "color: darkblue;"
                                  "background-color: #FFF951;}");
-        ThreadEmp threadEmp;
-        threadEmp.start();
+        ExportXML exportXML;
+        exportXML.openImport(true);
     }else if(currTime == "15:00:00"){
         timeLabel->setStyleSheet("QLCDNumber {"
                                  "color: darkblue;"
                                  "background-color: #FFF951;}");
-        ThreadEmp threadEmp;
-        threadEmp.start();
+        ExportXML exportXML;
+        exportXML.openImport(false);
     }else if(currTime == "18:00:00"){
         timeLabel->setStyleSheet("QLCDNumber {"
                                  "color: darkblue;"
                                  "background-color: #FFF951;}");
-        ThreadEmp threadEmp;
-        threadEmp.start();
+        ExportXML exportXML;
+        exportXML.openImport(false);
     }else if(currTime == "21:00:00"){
         timeLabel->setStyleSheet("QLCDNumber {"
                                  "color: darkblue;"
                                  "background-color: #FFF951;}");
-        ThreadEmp threadEmp;
-        threadEmp.start();
+        ExportXML exportXML;
+        exportXML.openImport(true);
     }
 
     if(currTime == "23:30:00"){

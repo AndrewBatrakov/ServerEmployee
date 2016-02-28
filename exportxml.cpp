@@ -18,7 +18,7 @@ ExportXML::ExportXML(QWidget *parent)
     rowAll = new QAxObject;
 }
 
-void ExportXML::openImport()
+void ExportXML::openImport(bool allRead)
 {
     //QTextCodec::setCodecForCStrings(QTextCodec::codecForName("UTF8"));
     //QTextCodec::setCodecForTr(QTextCodec::codecForName("Windows-1251"));
@@ -311,6 +311,7 @@ void ExportXML::openImport()
             xml.writeAttribute(tr("DateUvolneniya"),dateUvolneniya);
             xml.writeAttribute(tr("KodKarty"),kodKarty);
 
+            if(allRead){
             /*queryAll = rrr->querySubObject("NewObject(QVariant &)",QVariant(tr("Query")));
             queryAll->dynamicCall("Text", queryTextPassport.arg(kodSsylka));
             resAll = queryAll->querySubObject("Execute()");
@@ -428,7 +429,7 @@ void ExportXML::openImport()
             }
             queryAll->clear();
             delete queryAll;*/
-
+            }
             xml.writeEndElement();
         }
 

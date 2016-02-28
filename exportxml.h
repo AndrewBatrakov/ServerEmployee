@@ -28,7 +28,7 @@ public:
     QAxObject *resAll;
 
 public slots:
-    void openImport();
+    void openImport(bool);
 
 private slots:
     QString convertStToDate(QString);
