@@ -1,9 +1,7 @@
 #ifndef EXPORTXML_H
 #define EXPORTXML_H
 
-#include <QDialog>
-#include "lineedit.h"
-#include <QLibrary>
+#include <QtWidgets>
 #include <QAxObject>
 #include <QtNetwork>
 
@@ -32,15 +30,6 @@ public slots:
 
 private slots:
     QString convertStToDate(QString);
-
-private:
-    //QFtp *ftpPut;
-    //QFile *filePut;
-    //QLabel *nameCount;
-    //QLabel *editCount;
-    //QLabel *nameAll;
-    //QLabel *editAll;
-
 };
 
 #endif // ONECIMPORT_H

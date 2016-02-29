@@ -1,4 +1,4 @@
-#include <QtGui>
+//#include <QtWidgets>
 #include <QtSql>
 
 #include "exportxml.h"
@@ -6,7 +6,6 @@
 #include "mainwindow.h"
 #include <qaxobject.h>
 #include "databasedirection.h"
-#include "putftp.h"
 #include "putftp.h"
 
 ExportXML::ExportXML(QWidget *parent)
@@ -18,7 +17,7 @@ ExportXML::ExportXML(QWidget *parent)
     rowAll = new QAxObject;
 }
 
-void ExportXML::openImport(bool allRead)
+void ExportXML::openImport(bool)
 {
     //QTextCodec::setCodecForCStrings(QTextCodec::codecForName("UTF8"));
     //QTextCodec::setCodecForTr(QTextCodec::codecForName("Windows-1251"));
@@ -311,7 +310,6 @@ void ExportXML::openImport(bool allRead)
             xml.writeAttribute(tr("DateUvolneniya"),dateUvolneniya);
             xml.writeAttribute(tr("KodKarty"),kodKarty);
 
-            if(allRead){
             /*queryAll = rrr->querySubObject("NewObject(QVariant &)",QVariant(tr("Query")));
             queryAll->dynamicCall("Text", queryTextPassport.arg(kodSsylka));
             resAll = queryAll->querySubObject("Execute()");
@@ -429,7 +427,7 @@ void ExportXML::openImport(bool allRead)
             }
             queryAll->clear();
             delete queryAll;*/
-            }
+
             xml.writeEndElement();
         }
 
@@ -437,16 +435,16 @@ void ExportXML::openImport(bool allRead)
         xml.writeEndDocument();
 
         file.close();
-        QFile fileOut("./Obmen.xml");
-        fileOut.open(QIODevice::ReadOnly);
-        QByteArray byteArray = fileOut.readAll();
-        if(byteArray.isEmpty()){
-            QMessageBox::warning(this,"Attention!!!",file.errorString());
-        }
+//        QFile fileOut("./Obmen.xml");
+//        fileOut.open(QIODevice::ReadOnly);
+//        QByteArray byteArray = fileOut.readAll();
+//        if(byteArray.isEmpty()){
+//            QMessageBox::warning(this,"Attention!!!",file.errorString());
+//        }
 
 
-        QByteArray compressData = qCompress(byteArray);
-        QFile compressFile("./Obmen.rar");
+        //QByteArray compressData = qCompress(byteArray);
+        //QFile compressFile("./Obmen.rar");
 //        compressFile.open(QIODevice::WriteOnly);
 //        compressFile.write(compressData);
 
@@ -462,14 +460,15 @@ void ExportXML::openImport(bool allRead)
         //fO.open(QIODevice::WriteOnly);
         //fO.write(qUncompress(bb));
 
-        fileOut.close();
+        //fileOut.close();
         //fO.close();
         //while(compressFile->isOpen());
 
         excel->clear();
         excel->~QAxObject();
-        PutFtp putFtp(this);
-        putFtp.putFtp();
+
+        //PutFtp putFtp;
+       // putFtp.putFile();
     }else{
         QMessageBox::warning(this,QObject::tr("Attention!!!"),QObject::tr("Don't create COM connector..."));
     }

@@ -1,12 +1,10 @@
 #include "putftp.h"
 
-PutFtp::PutFtp(QWidget *parent) :
-    QDialog(parent)
+PutFtp::PutFtp()
 {
-
 }
 
-void PutFtp::putFtp()
+void PutFtp::putFile()
 {
     filePut = new QFile("./Obmen.xml");
     if(!filePut->open(QIODevice::ReadOnly)){

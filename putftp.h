@@ -8,10 +8,10 @@ class PutFtp : public QDialog
 {
     Q_OBJECT
 public:
-    PutFtp(QWidget *);
+    PutFtp();
 
 public slots:
-    void putFtp();
+    void putFile();
 
 private slots:
     void updateDataTransferProgress(qint64, qint64);

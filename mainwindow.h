@@ -4,8 +4,6 @@
 #include <QtWidgets>
 #include "update.h"
 #include "update.h"
-//#include "onecimport.h"
-//#include "exportxml.h"
 
 class MainWindow : public QMainWindow
 {
@@ -32,8 +30,6 @@ private:
     QLCDNumber *timeLabel;
     Update updateFtp;
     Update update;
-    //ImportOneForm importOneC;
-    //ExportXML exportXML;
 };
 
 #endif // MAINWINDOW_H

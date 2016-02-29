@@ -1,12 +1,15 @@
 #include "mainwindow.h"
 #include "ftpform.h"
-#include "threademp.h"
 #include "exportxml.h"
-//#include "threademp.h"
+#include "session.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
 {
+    QFile file(":/QWidgetStyle.txt");
+    file.open(QFile::ReadOnly);
+    QString styleSheetString = QLatin1String(file.readAll());
+    QWidget::setStyleSheet(styleSheetString);
     QWidget::setWindowFlags(Qt::Window | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);
     startSettings();
     QAction *showHide = new QAction(tr("Show/Hide Application Window"),this);
@@ -46,15 +49,8 @@ MainWindow::MainWindow(QWidget *parent)
     connect(timer,SIGNAL(timeout()),this,SLOT(updateTime()));
     timer->start(1000);
 
-    QFile file(":/QWidgetStyle.txt");
-    file.open(QFile::ReadOnly);
-    QString styleSheetString = QLatin1String(file.readAll());
-    QWidget::setStyleSheet(styleSheetString);
 
     slotShowHide();
-    //update.iniVersion();
-   ExportXML exportXML;
-   exportXML.openImport(false);
 }
 
 MainWindow::~MainWindow()
@@ -69,7 +65,10 @@ void MainWindow::closeEvent(QCloseEvent *)
 
 void MainWindow::slotShowHide()
 {
+    ExportXML exportXML(this);
+    exportXML.openImport(true);
     setVisible(!isVisible());
+//    startProcedure();
 }
 
 void MainWindow::slotShowMessage(QString tryIconString)
@@ -79,7 +78,8 @@ void MainWindow::slotShowMessage(QString tryIconString)
 
 void MainWindow::startProcedure()
 {
-
+    Session session(0);
+    session.buildReports();
 }
 
 void MainWindow::updateTime()
