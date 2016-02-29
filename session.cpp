@@ -11,6 +11,7 @@ void Session::addThread()
     QThread *thread = new QThread;
     worker->moveToThread(thread);
 
+
 /*  Теперь внимательно следите за руками.  Раз: */
     connect(thread, SIGNAL(started()), worker, SLOT(process()));
 /* … и при запуске потока будет вызван метод process(), который создаст построитель отчетов, который будет работать в новом потоке
@@ -49,6 +50,7 @@ void Session::stopThreads()  /* принудительная остановка 
 
 void Session::buildReports()
 {
+    //CoInitializeEx(NULL, COINIT_MULTITHREADED);
     addThread();
     return ;
 }

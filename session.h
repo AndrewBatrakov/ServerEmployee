@@ -2,8 +2,9 @@
 #define SESSION_H
 
 #include <QObject>
+#include <QThreadPool>
 
-class Session : public QObject
+class Session : public QObject //, public QRunnable
 {
     Q_OBJECT
 

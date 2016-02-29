@@ -13,12 +13,12 @@ class QDateEdit;
 class QTableView;
 class QAxObject;
 
-class ExportXML : public QDialog
+class ExportXML : public QObject
 {
     Q_OBJECT
 
 public:
-    ExportXML(QWidget *parent = 0);
+    ExportXML(QObject *parent = 0);
 
     QAxObject *excel;
     QAxObject *queryAll;

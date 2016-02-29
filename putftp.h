@@ -11,7 +11,7 @@ public:
     PutFtp();
 
 public slots:
-    void putFile();
+    void putFile(QString);
 
 private slots:
     void updateDataTransferProgress(qint64, qint64);

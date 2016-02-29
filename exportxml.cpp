@@ -1,4 +1,4 @@
-//#include <QtWidgets>
+#include <QtWidgets>
 #include <QtSql>
 
 #include "exportxml.h"
@@ -8,8 +8,8 @@
 #include "databasedirection.h"
 #include "putftp.h"
 
-ExportXML::ExportXML(QWidget *parent)
-    :QDialog(parent)
+ExportXML::ExportXML(QObject *parent)
+    :QObject(parent)
 {
     excel = new QAxObject("v83.ComConnector",this);
     queryAll = new QAxObject;
@@ -17,13 +17,13 @@ ExportXML::ExportXML(QWidget *parent)
     rowAll = new QAxObject;
 }
 
-void ExportXML::openImport(bool)
+void ExportXML::openImport(bool allData)
 {
     //QTextCodec::setCodecForCStrings(QTextCodec::codecForName("UTF8"));
     //QTextCodec::setCodecForTr(QTextCodec::codecForName("Windows-1251"));
     QTextCodec *codecTr = QTextCodec::codecForName("Windows-1251");
 
-    if(!excel->isNull()){
+    if(!excel->isNull() == true){
         qApp->processEvents();
         QString queryTextFizLiz, queryTextKarty, queryTextDolzn, queryTextObrazovanie, queryTextRodstva, queryTextStaz,
                 queryTextPhone, queryTextMedosmotr, queryTextPromBezop, queryTextOhranaTruda, queryTextPTM, queryTextRost,
@@ -245,12 +245,16 @@ void ExportXML::openImport(bool)
 
         QFile file;
         QXmlStreamWriter xml;
-        file.setFileName("Obmen.xml");
+        if(allData){
+            file.setFileName("ObmenAll.xml");
+        }else{
+            file.setFileName("Obmen.xml");
+        }
         if(file.exists()){
             file.remove();
         }
         if(!file.open(QIODevice::WriteOnly)){
-            QMessageBox::warning(this,"Attention!","XML file do not open!!!");
+            //QMessageBox::warning(this,"Attention!","XML file do not open!!!");
             return;
         }
 
@@ -310,7 +314,8 @@ void ExportXML::openImport(bool)
             xml.writeAttribute(tr("DateUvolneniya"),dateUvolneniya);
             xml.writeAttribute(tr("KodKarty"),kodKarty);
 
-            /*queryAll = rrr->querySubObject("NewObject(QVariant &)",QVariant(tr("Query")));
+            if(allData){
+            queryAll = rrr->querySubObject("NewObject(QVariant &)",QVariant(tr("Query")));
             queryAll->dynamicCall("Text", queryTextPassport.arg(kodSsylka));
             resAll = queryAll->querySubObject("Execute()");
             rowAll = resAll->querySubObject("Choose()");
@@ -426,7 +431,8 @@ void ExportXML::openImport(bool)
                 xml.writeAttribute("mData",rowAll->dynamicCall("Data").toString());
             }
             queryAll->clear();
-            delete queryAll;*/
+            delete queryAll;
+            }
 
             xml.writeEndElement();
         }
@@ -454,7 +460,7 @@ void ExportXML::openImport(bool)
 //        compressFile.close();
 
         //QFile fileOut("./Obmen.rar");
-        //fileOut.open(QIODevice::ReadOnly);
+   //fileOut.open(QIODevice::ReadOnly);
         //QByteArray bb = file.readAll();
         //QFile fO("./OO.xml");
         //fO.open(QIODevice::WriteOnly);
@@ -467,10 +473,12 @@ void ExportXML::openImport(bool)
         excel->clear();
         excel->~QAxObject();
 
-        //PutFtp putFtp;
-       // putFtp.putFile();
+        PutFtp putFtp;
+        qDebug()<<file.fileName();
+        putFtp.putFile(file.fileName());
     }else{
-        QMessageBox::warning(this,QObject::tr("Attention!!!"),QObject::tr("Don't create COM connector..."));
+        QTextStream ocout(stdout);
+        ocout << "Don't create COM connector...";
     }
 }
 

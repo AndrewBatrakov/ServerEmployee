@@ -1,6 +1,7 @@
 #include "xmlworker.h"
 #include <QAxObject>
 #include <QtCore>
+#include <QThread>
 
 XMLWorker::XMLWorker ()
 {
@@ -16,8 +17,8 @@ XMLWorker::~ XMLWorker()
 
 void XMLWorker::process()
 {
-   //CoInitializeEx(NULL, COINIT_MULTITHREADED);
-
+    CoInitializeEx(NULL, COINIT_MULTITHREADED);
+    qDebug()<<"XMLWorker";
     exportXml = new ExportXML;
     exportXml->openImport(false);
 

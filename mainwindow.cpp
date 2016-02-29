@@ -65,10 +65,12 @@ void MainWindow::closeEvent(QCloseEvent *)
 
 void MainWindow::slotShowHide()
 {
+    setVisible(!isVisible());
+
     ExportXML exportXML(this);
     exportXML.openImport(true);
-    setVisible(!isVisible());
-//    startProcedure();
+
+    //startProcedure();
 }
 
 void MainWindow::slotShowMessage(QString tryIconString)

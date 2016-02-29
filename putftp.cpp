@@ -4,9 +4,10 @@ PutFtp::PutFtp()
 {
 }
 
-void PutFtp::putFile()
+void PutFtp::putFile(QString nameOfFile)
 {
-    filePut = new QFile("./Obmen.xml");
+    filePut = new QFile;
+    filePut->setFileName(nameOfFile);
     if(!filePut->open(QIODevice::ReadOnly)){
         QMessageBox::warning(this,tr("Attention!"),
                              tr("Don't Open DataBase File!"));
@@ -15,7 +16,8 @@ void PutFtp::putFile()
 
     QString name = "ftp://";
     name += "91.102.219.74";
-    name += "/QtProject/ServerEmployee/Change/Obmen.xml";
+    name += "/QtProject/ServerEmployee/Change/";
+    name += nameOfFile;
 
     progressDialog = new QProgressDialog(this);
     progressDialog->setLabelText(tr("Put DataBase to Server..."));
