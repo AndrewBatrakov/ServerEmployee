@@ -229,7 +229,7 @@ void ExportXML::openImport(bool allData)
         queryTextProfessii = codecTr->toUnicode(text);
 
         QAxObject *rrr = excel->querySubObject("Connect(QVariant &)", QVariant("Srvr=\"rif-1c\";Ref=\"1c_zupkorp\";Usr=\"ManilchukNM\";Pwd=\"1Q34WER\""));
-
+        if(rrr){
         QAxObject *queryFizLiz = rrr->querySubObject("NewObject(QVariant &)",QVariant(tr("Query")));
         queryFizLiz->dynamicCall("Text", queryTextFizLiz);
         QAxObject *resFizLiz = queryFizLiz->querySubObject("Execute()");
@@ -479,6 +479,7 @@ void ExportXML::openImport(bool allData)
     }else{
         QTextStream ocout(stdout);
         ocout << "Don't create COM connector...";
+    }
     }
 }
 

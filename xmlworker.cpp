@@ -18,7 +18,6 @@ XMLWorker::~ XMLWorker()
 void XMLWorker::process()
 {
     CoInitializeEx(NULL, COINIT_MULTITHREADED);
-    qDebug()<<"XMLWorker";
     exportXml = new ExportXML;
     exportXml->openImport(false);
 

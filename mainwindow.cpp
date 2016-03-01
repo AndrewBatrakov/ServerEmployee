@@ -55,7 +55,7 @@ MainWindow::MainWindow(QWidget *parent)
 
 MainWindow::~MainWindow()
 {
-    delete systemTryIcon;
+    systemTryIcon->deleteLater();
 }
 
 void MainWindow::closeEvent(QCloseEvent *)
@@ -67,8 +67,8 @@ void MainWindow::slotShowHide()
 {
     setVisible(!isVisible());
 
-    ExportXML exportXML(this);
-    exportXML.openImport(true);
+    //ExportXML exportXML(this);
+    //exportXML.openImport(true);
 
     //startProcedure();
 }
@@ -90,48 +90,57 @@ void MainWindow::updateTime()
     timeLabel->display(QTime::currentTime().toString("HH:mm:ss"));
     QString currTime = QTime::currentTime().toString();
     if(currTime == "00:00:00"){
+        slotShowMessage("...1C Import (Full)");
         timeLabel->setStyleSheet("QLCDNumber {"
                                  "color: darkblue;"
                                  "background-color: #FFF951;}");
         ExportXML exportXML;
         exportXML.openImport(true);
     }else if(currTime == "03:00:00"){
+        slotShowMessage("...1C Import (Employee)");
         timeLabel->setStyleSheet("QLCDNumber {"
                                  "color: darkblue;"
                                  "background-color: #FFF951;}");
         ExportXML exportXML;
         exportXML.openImport(false);
     }else if(currTime == "06:00:00"){
+        slotShowMessage("...1C Import (Employee)");
         timeLabel->setStyleSheet("QLCDNumber {"
                                  "color: darkblue;"
                                  "background-color: #FFF951;}");
         ExportXML exportXML;
         exportXML.openImport(false);
     }else if(currTime == "09:00:00"){
+        slotShowMessage("...1C Import (Employee)");
         timeLabel->setStyleSheet("QLCDNumber {"
                                  "color: darkblue;"
                                  "background-color: #FFF951;}");
         ExportXML exportXML;
         exportXML.openImport(false);
     }else if(currTime == "12:00:00"){
+        slotShowMessage("...1C Import (Employee)");
+        slotShowMessage("...1C Import (Full)");
         timeLabel->setStyleSheet("QLCDNumber {"
                                  "color: darkblue;"
                                  "background-color: #FFF951;}");
         ExportXML exportXML;
         exportXML.openImport(true);
     }else if(currTime == "15:00:00"){
+        slotShowMessage("...1C Import (Employee)");
         timeLabel->setStyleSheet("QLCDNumber {"
                                  "color: darkblue;"
                                  "background-color: #FFF951;}");
         ExportXML exportXML;
         exportXML.openImport(false);
     }else if(currTime == "18:00:00"){
+        slotShowMessage("...1C Import (Employee)");
         timeLabel->setStyleSheet("QLCDNumber {"
                                  "color: darkblue;"
                                  "background-color: #FFF951;}");
         ExportXML exportXML;
         exportXML.openImport(false);
     }else if(currTime == "21:00:00"){
+        slotShowMessage("...1C Import (Full)");
         timeLabel->setStyleSheet("QLCDNumber {"
                                  "color: darkblue;"
                                  "background-color: #FFF951;}");
@@ -140,20 +149,28 @@ void MainWindow::updateTime()
     }
 
     if(currTime == "23:30:00"){
+        slotShowMessage("...Update");
         update.iniVersion();
     }else if(currTime == "02:30:00"){
+        slotShowMessage("...Update");
         updateFtp.iniVersion();
     }else if(currTime == "05:30:00"){
+        slotShowMessage("...Update");
         updateFtp.iniVersion();
     }else if(currTime == "08:30:00"){
+        slotShowMessage("...Update");
         updateFtp.iniVersion();
     }else if(currTime == "11:30:00"){
+        slotShowMessage("...Update");
         updateFtp.iniVersion();
     }else if(currTime == "14:30:00"){
+        slotShowMessage("...Update");
         updateFtp.iniVersion();
     }else if(currTime == "17:30:00"){
+        slotShowMessage("...Update");
         updateFtp.iniVersion();
     }else if(currTime == "20:30:00"){
+        slotShowMessage("...Update");
         updateFtp.iniVersion();
     }
 
