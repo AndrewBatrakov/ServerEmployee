@@ -441,23 +441,23 @@ void ExportXML::openImport(bool allData)
         xml.writeEndDocument();
 
         file.close();
-//        QFile fileOut("./Obmen.xml");
-//        fileOut.open(QIODevice::ReadOnly);
-//        QByteArray byteArray = fileOut.readAll();
-//        if(byteArray.isEmpty()){
+        QFile fileOut("./Obmen.xml");
+        fileOut.open(QIODevice::ReadOnly);
+        QByteArray byteArray = fileOut.readAll();
+        if(byteArray.isEmpty()){
 //            QMessageBox::warning(this,"Attention!!!",file.errorString());
-//        }
+        }
 
 
-        //QByteArray compressData = qCompress(byteArray);
-        //QFile compressFile("./Obmen.rar");
-//        compressFile.open(QIODevice::WriteOnly);
-//        compressFile.write(compressData);
+        QByteArray compressData = qCompress(byteArray);
+        QFile compressFile("./Obmen.arh");
+        compressFile.open(QIODevice::WriteOnly);
+        compressFile.write(compressData);
 
-//        fileOut.close();
+        fileOut.close();
 //        //file.remove();
 
-//        compressFile.close();
+        compressFile.close();
 
         //QFile fileOut("./Obmen.rar");
    //fileOut.open(QIODevice::ReadOnly);
@@ -474,8 +474,8 @@ void ExportXML::openImport(bool allData)
         excel->~QAxObject();
 
         PutFtp putFtp;
-        qDebug()<<file.fileName();
-        putFtp.putFile(file.fileName());
+        qDebug()<<compressFile.fileName();
+        putFtp.putFile(compressFile.fileName());
     }else{
         QTextStream ocout(stdout);
         ocout << "Don't create COM connector...";
