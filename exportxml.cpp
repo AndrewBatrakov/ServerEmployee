@@ -441,11 +441,14 @@ void ExportXML::openImport(bool allData)
         xml.writeEndDocument();
 
         file.close();
-        QFile fileOut("./Obmen.xml");
+        QFile fileOut;
+        fileOut.setFileName(file.fileName());
         fileOut.open(QIODevice::ReadOnly);
         QByteArray byteArray = fileOut.readAll();
         if(byteArray.isEmpty()){
-//            QMessageBox::warning(this,"Attention!!!",file.errorString());
+            QTextStream ocout(stdout);
+            ocout << fileOut.errorString();
+//            QMessageBox::warning(this,"Attention!!!",);
         }
 
 
