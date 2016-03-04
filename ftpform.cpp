@@ -71,7 +71,7 @@ void FtpForm::done(int result)
     QDialog::done(result);
 }
 
-void FtpForm::replyFinished(QNetworkReply *reply)
+void FtpForm::replyFinished(QNetworkReply *)
 {
 
 }

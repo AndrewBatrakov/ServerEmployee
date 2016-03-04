@@ -26,3 +26,5 @@ include(Services.pri)
 
 RESOURCES += \
     icons.qrc
+
+RC_FILE = ServerEmployee.rc

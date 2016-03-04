@@ -1,6 +1,4 @@
 #include "update.h"
-//#include <QApplication>
-//#include "mainwindow.h"
 
 Update::Update(QWidget *parent) :
     QDialog(parent)
@@ -38,15 +36,12 @@ bool Update::newVersion()
     nowVersion = iniSettings.value("Version").toString();
 
     if(iniVersion.toFloat() > nowVersion.toFloat()){
-        //int k = QMessageBox::question(this,tr("New Updates"),tr("New Updates Available! Download?"),QMessageBox::Yes|QMessageBox::No,QMessageBox::No);
-        //if(k == QMessageBox::Yes){
             QSettings iniSettings("ServerEmployee.ini",QSettings::IniFormat);
             iniSettings.setValue("Version",iniVersion);
             iniSettings.sync();
 
             resultUpdates = true;
             exeVersion();
-        //}
     }
     return resultUpdates;
 }
@@ -167,10 +162,7 @@ void Update::cancelDownLoadTrance()
 void Update::restartProgramm()
 {
     QProcess::startDetached("ServerEmployee.exe");
-//    QSettings settings("AO_Batrakov_Inc.", "ServerEmployee");
-//    settings.setValue("QUIT",true);
     QApplication::setQuitOnLastWindowClosed(true);
-    //MainWindow::close();
     emit qApp->quit();
 }
 

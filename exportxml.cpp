@@ -7,6 +7,7 @@
 #include <qaxobject.h>
 #include "databasedirection.h"
 #include "putftp.h"
+//#include
 
 ExportXML::ExportXML(QObject *parent)
     :QObject(parent)
@@ -453,7 +454,12 @@ void ExportXML::openImport(bool allData)
 
 
         QByteArray compressData = qCompress(byteArray);
-        QFile compressFile("./Obmen.arh");
+        QFile compressFile;
+        QFileInfo fileInfo;
+        fileInfo.setFile(file.fileName());
+        QString fN = fileInfo.baseName();
+        fN += ".arh";
+        compressFile.setFileName(fN);
         compressFile.open(QIODevice::WriteOnly);
         compressFile.write(compressData);
 
@@ -477,11 +483,14 @@ void ExportXML::openImport(bool allData)
         excel->~QAxObject();
 
         PutFtp putFtp;
-        qDebug()<<compressFile.fileName();
+        qDebug()<<compressFile.fileName()<<", "<<QTime::currentTime();
         putFtp.putFile(compressFile.fileName());
     }else{
+            excel->clear();
+            excel->~QAxObject();
         QTextStream ocout(stdout);
         ocout << "Don't create COM connector...";
+
     }
     }
 }

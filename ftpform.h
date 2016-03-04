@@ -16,7 +16,7 @@ public:
 
 public slots:
     void saveFtpSettings();
-    void replyFinished(QNetworkReply *fin);
+    void replyFinished(QNetworkReply *);
     void conn();
 
 private:
