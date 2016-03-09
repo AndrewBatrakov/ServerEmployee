@@ -43,6 +43,7 @@ bool Update::newVersion()
             resultUpdates = true;
             exeVersion();
     }
+
     return resultUpdates;
 }
 
@@ -68,9 +69,9 @@ void Update::exeVersion()
     fileR.rename("./ServerEmployee.exe.bak");
     fileR.close();
 
-    QFile fileRe;
-    fileRe.setFileName("./ServerEmployeeHttpFromSite.ini");
-    fileRe.remove();
+//    QFile fileRe;
+//    fileRe.setFileName("./ServerEmployeeHttpFromSite.ini");
+//    fileRe.remove();
 
 
     url = "http://91.102.219.74/QtProject/ServerEmployee/ServerEmployee.exe";//url.toString() += "EmployeeClient.exe";
@@ -110,6 +111,7 @@ void Update::tranceVersion()
 void Update::httpDoneIni()
 {
     fileHttpIni->close();
+    fileHttpIni->remove();
     newVersion();
 }
 

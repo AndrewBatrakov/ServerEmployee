@@ -72,8 +72,6 @@ private:
     QProgressDialog *progressDialogIni;
     QProgressDialog *progressDialogExe;
     QProgressDialog *progressDialogTrance;
-
-    //int
 };
 
 #endif // UPDATEHTTP_H
