@@ -2,12 +2,8 @@
 #include <QtSql>
 
 #include "exportxml.h"
-#include "numprefix.h"
-#include "mainwindow.h"
 #include <qaxobject.h>
-#include "databasedirection.h"
 #include "putftp.h"
-//#include
 
 ExportXML::ExportXML(QObject *parent)
     :QObject(parent)
@@ -30,56 +26,56 @@ void ExportXML::openImport(bool allData)
                 queryTextPhone, queryTextMedosmotr, queryTextPromBezop, queryTextOhranaTruda, queryTextPTM, queryTextRost,
                 queryTextProfessii, queryTextPassport;
 
-//        queryTextFizLiz = tr("ВЫБРАТЬ "
-//                             "ФизическиеЛица.ПометкаУдаления КАК DeletionMark, "
-//                             "ФизическиеЛица.Код КАК Kod, "
-//                             "ФизическиеЛица.Наименование КАК FIO, "
-//                             "ФизическиеЛица.ДатаРождения КАК DataRozdeniya "
-//                             "ИЗ Справочник.ФизическиеЛица КАК ФизическиеЛица "
-//                             "ГДЕ "
-//                             "ФизическиеЛица.ЭтоГруппа <> ИСТИНА "
-//                             "УПОРЯДОЧИТЬ ПО "
-//                             "FIO "
-//                             "АВТОУПОРЯДОЧИВАНИЕ");
+        //        queryTextFizLiz = tr("ВЫБРАТЬ "
+        //                             "ФизическиеЛица.ПометкаУдаления КАК DeletionMark, "
+        //                             "ФизическиеЛица.Код КАК Kod, "
+        //                             "ФизическиеЛица.Наименование КАК FIO, "
+        //                             "ФизическиеЛица.ДатаРождения КАК DataRozdeniya "
+        //                             "ИЗ Справочник.ФизическиеЛица КАК ФизическиеЛица "
+        //                             "ГДЕ "
+        //                             "ФизическиеЛица.ЭтоГруппа <> ИСТИНА "
+        //                             "УПОРЯДОЧИТЬ ПО "
+        //                             "FIO "
+        //                             "АВТОУПОРЯДОЧИВАНИЕ");
         QByteArray text = ("ВЫБРАТЬ "
-                             "ФизическиеЛица.Код КАК Kod, "
-                             "ФизическиеЛица.Наименование КАК FIO, "
-                             "ФизическиеЛица.ДатаРождения КАК DataRozdeniya, "
-                             "ФизическиеЛица.ПометкаУдаления КАК DeletionMark, "
-                             "РаботникиОрганизацийСрезПоследних.Сотрудник.Код КАК TabelNumber, "
-                             "РаботникиОрганизацийСрезПоследних.ОбособленноеПодразделение.Наименование КАК Obosobl, "
-                             "РаботникиОрганизацийСрезПоследних.ПодразделениеОрганизации.Наименование КАК Subdivision, "
-                             "РаботникиОрганизацийСрезПоследних.Должность.Наименование КАК Post, "
-                             "РаботникиОрганизацийСрезПоследних.ГрафикРаботы.Наименование КАК GrafikRabot, "
-                             "РаботникиОрганизацийСрезПоследних.Сотрудник.ДатаПриемаНаРаботу КАК DatePostupleniya, "
-                             "РаботникиОрганизацийСрезПоследних.Сотрудник.ДатаУвольнения КАК DateUvolneniya, "
-                             "СИТ_АРМ_ДанныеКартСрезПоследних.КодКарты КАК KodKarty "
-                             "ИЗ "
-                             "Справочник.ФизическиеЛица КАК ФизическиеЛица "
-                             "ЛЕВОЕ СОЕДИНЕНИЕ РегистрСведений.РаботникиОрганизаций.СрезПоследних КАК РаботникиОрганизацийСрезПоследних "
-                             "ПО ФизическиеЛица.Ссылка = РаботникиОрганизацийСрезПоследних.Сотрудник.Физлицо.Ссылка "
-                             "ЛЕВОЕ СОЕДИНЕНИЕ РегистрСведений.СИТ_АРМ_ДанныеКарт.СрезПоследних КАК СИТ_АРМ_ДанныеКартСрезПоследних "
-                             "ПО ФизическиеЛица.Ссылка = СИТ_АРМ_ДанныеКартСрезПоследних.Физлицо.Ссылка "
-                             "ГДЕ "
-                             "НЕ ФизическиеЛица.ЭтоГруппа "
-                             "И НЕ ФизическиеЛица.ПометкаУдаления "
-                             "И РаботникиОрганизацийСрезПоследних.Сотрудник.ДатаУвольнения = ДАТАВРЕМЯ(1, 1, 1) "
-                             "И НЕ РаботникиОрганизацийСрезПоследних.Сотрудник.ДатаПриемаНаРаботу = ДАТАВРЕМЯ(1, 1, 1) "
-                             "И СИТ_АРМ_ДанныеКартСрезПоследних.Активна "
-                             "УПОРЯДОЧИТЬ ПО "
-                             "FIO");
+                           "ФизическиеЛица.Код КАК Kod, "
+                           "ФизическиеЛица.Наименование КАК FIO, "
+                           "ФизическиеЛица.ДатаРождения КАК DataRozdeniya, "
+                           "ФизическиеЛица.ПометкаУдаления КАК DeletionMark, "
+                           "РаботникиОрганизацийСрезПоследних.Сотрудник.Код КАК TabelNumber, "
+                           "РаботникиОрганизацийСрезПоследних.ОбособленноеПодразделение.Наименование КАК Obosobl, "
+                           "РаботникиОрганизацийСрезПоследних.ПодразделениеОрганизации.Наименование КАК Subdivision, "
+                           "РаботникиОрганизацийСрезПоследних.Должность.Наименование КАК Post, "
+                           "РаботникиОрганизацийСрезПоследних.ГрафикРаботы.Наименование КАК GrafikRabot, "
+                           "РаботникиОрганизацийСрезПоследних.Сотрудник.ДатаПриемаНаРаботу КАК DatePostupleniya, "
+                           "РаботникиОрганизацийСрезПоследних.Сотрудник.ДатаУвольнения КАК DateUvolneniya, "
+                           "СИТ_АРМ_ДанныеКартСрезПоследних.КодКарты КАК KodKarty "
+                           "ИЗ "
+                           "Справочник.ФизическиеЛица КАК ФизическиеЛица "
+                           "ЛЕВОЕ СОЕДИНЕНИЕ РегистрСведений.РаботникиОрганизаций.СрезПоследних КАК РаботникиОрганизацийСрезПоследних "
+                           "ПО ФизическиеЛица.Ссылка = РаботникиОрганизацийСрезПоследних.Сотрудник.Физлицо.Ссылка "
+                           "ЛЕВОЕ СОЕДИНЕНИЕ РегистрСведений.СИТ_АРМ_ДанныеКарт.СрезПоследних КАК СИТ_АРМ_ДанныеКартСрезПоследних "
+                           "ПО ФизическиеЛица.Ссылка = СИТ_АРМ_ДанныеКартСрезПоследних.Физлицо.Ссылка "
+                           "ГДЕ "
+                           "НЕ ФизическиеЛица.ЭтоГруппа "
+                           "И НЕ ФизическиеЛица.ПометкаУдаления "
+                           "И РаботникиОрганизацийСрезПоследних.Сотрудник.ДатаУвольнения = ДАТАВРЕМЯ(1, 1, 1) "
+                           "И НЕ РаботникиОрганизацийСрезПоследних.Сотрудник.ДатаПриемаНаРаботу = ДАТАВРЕМЯ(1, 1, 1) "
+                           "И СИТ_АРМ_ДанныеКартСрезПоследних.Активна "
+                           "УПОРЯДОЧИТЬ ПО "
+                           "FIO");
         queryTextFizLiz = codecTr->toUnicode(text);
 
-//        text = tr("ВЫБРАТЬ ПЕРВЫЕ 1 "
-//                            "СИТ_АРМ_ДанныеКартСрезПоследних.КодКарты КАК KodKarty "
-//                            "ИЗ "
-//                            "РегистрСведений.СИТ_АРМ_ДанныеКарт.СрезПоследних КАК "
-//                            "СИТ_АРМ_ДанныеКартСрезПоследних "
-//                            "ГДЕ СИТ_АРМ_ДанныеКартСрезПоследних.Физлицо.Код = \"%1\" "
-//                            "И СИТ_АРМ_ДанныеКартСрезПоследних.Активна = ИСТИНА "
-//                            "УПОРЯДОЧИТЬ ПО "
-//                            "СИТ_АРМ_ДанныеКартСрезПоследних.Период УБЫВ ");
-//        queryTextKarty = codecTr->toUnicode(text);
+        //        text = tr("ВЫБРАТЬ ПЕРВЫЕ 1 "
+        //                            "СИТ_АРМ_ДанныеКартСрезПоследних.КодКарты КАК KodKarty "
+        //                            "ИЗ "
+        //                            "РегистрСведений.СИТ_АРМ_ДанныеКарт.СрезПоследних КАК "
+        //                            "СИТ_АРМ_ДанныеКартСрезПоследних "
+        //                            "ГДЕ СИТ_АРМ_ДанныеКартСрезПоследних.Физлицо.Код = \"%1\" "
+        //                            "И СИТ_АРМ_ДанныеКартСрезПоследних.Активна = ИСТИНА "
+        //                            "УПОРЯДОЧИТЬ ПО "
+        //                            "СИТ_АРМ_ДанныеКартСрезПоследних.Период УБЫВ ");
+        //        queryTextKarty = codecTr->toUnicode(text);
 
         text = ("ВЫБРАТЬ "
                 "ПаспротныеДанныеФизЛицСрезПоследних.ДокументСерия КАК PassportSeriya, "
@@ -231,267 +227,225 @@ void ExportXML::openImport(bool allData)
 
         QAxObject *rrr = excel->querySubObject("Connect(QVariant &)", QVariant("Srvr=\"rif-1c\";Ref=\"1c_zupkorp\";Usr=\"ManilchukNM\";Pwd=\"1Q34WER\""));
         if(rrr){
-        QAxObject *queryFizLiz = rrr->querySubObject("NewObject(QVariant &)",QVariant(tr("Query")));
-        queryFizLiz->dynamicCall("Text", queryTextFizLiz);
-        QAxObject *resFizLiz = queryFizLiz->querySubObject("Execute()");
-        QAxObject *rowFizLiz = resFizLiz->querySubObject("Choose()");
+            QAxObject *queryFizLiz = rrr->querySubObject("NewObject(QVariant &)",QVariant(tr("Query")));
+            queryFizLiz->dynamicCall("Text", queryTextFizLiz);
+            QAxObject *resFizLiz = queryFizLiz->querySubObject("Execute()");
+            QAxObject *rowFizLiz = resFizLiz->querySubObject("Choose()");
 
-        //QProgressDialog progressR(this);
-
-        //progressR.setWindowModality(Qt::WindowModal);
-        //progressR.setMinimum(1);
-        //int cou = rowFizLiz->dynamicCall("Count()").toInt();
-        //progressR.setMaximum(cou);
-        //progressR.activateWindow();
-
-        QFile file;
-        QXmlStreamWriter xml;
-        if(allData){
-            file.setFileName("ObmenAll.xml");
-        }else{
-            file.setFileName("Obmen.xml");
-        }
-        if(file.exists()){
-            file.remove();
-        }
-        if(!file.open(QIODevice::WriteOnly)){
-            //QMessageBox::warning(this,"Attention!","XML file do not open!!!");
-            return;
-        }
-
-        xml.setDevice(&file);
-        xml.setAutoFormatting(true);
-        xml.writeStartDocument();
-        xml.writeStartElement(tr("FileExchange"));
-        xml.writeAttribute(tr("Date"),QDateTime::currentDateTime().toString("dd.MM.yyyy HH:mm:ss"));
-        //xml.writeAttribute(tr("Всего"),QString::number(cou));
-        xml.writeStartElement(tr("Employees"));
-
-        int lll = 0;
-        QString subName, postName, tabNumber, datePostupleniya, dateUvolneniya, grafikRabot, obosobl;
-        QString personName, dateName, kodSsylka, kodKarty, tephone;
-        QString vidObrazovaniya, uchebnoeZavedenie, spezialnost, diplom, godOconchaniya, kvalificaziya;
-        QString stepenRodstva,nameRodstva,dateRodstva;
-        //bool onWork;
-
-
-        while(rowFizLiz->dynamicCall("Next()").toBool()){
-            //if(progressR.wasCanceled()){
-            //    xml.writeEndElement();
-            //    break;
-            //}
-
-            //progressR.setWindowTitle(QString::number(lll));
-            //progressR.setValue(lll);
-            //progressR.activateWindow();
-            //progressR.show();
-
-            if(rowFizLiz->dynamicCall("DeletionMark").toBool()){
-                ++lll;
-                continue;
-            }
-
-            qApp->processEvents();
-            personName = rowFizLiz->dynamicCall("FIO").toString().simplified();
-            dateName = rowFizLiz->dynamicCall("DataRozdeniya").toString();
-            kodSsylka = rowFizLiz->dynamicCall("Kod").toString();
-            subName = rowFizLiz->dynamicCall("Subdivision").toString().simplified();
-            postName = rowFizLiz->dynamicCall("Post").toString().simplified();
-            tabNumber = rowFizLiz->dynamicCall("TabelNumber").toString();
-            datePostupleniya = rowFizLiz->dynamicCall("DatePostupleniya").toString();
-            dateUvolneniya = rowFizLiz->dynamicCall("DateUvolneniya").toString();
-            grafikRabot = rowFizLiz->dynamicCall("GrafikRabot").toString().simplified();
-            obosobl = rowFizLiz->dynamicCall("Obosobl").toString().simplified();
-            kodKarty = rowFizLiz->dynamicCall("KodKarty").toString().simplified();
-
-            xml.writeStartElement(tr("Element"));
-            xml.writeAttribute(tr("Employee"),personName);
-            xml.writeAttribute(tr("DataRozdeniya"),dateName);
-            xml.writeAttribute(tr("TabelNumber"),tabNumber);
-            xml.writeAttribute(tr("Subdivision"),subName);
-            xml.writeAttribute(tr("Post"),postName);
-            xml.writeAttribute(tr("Obosobl"),obosobl);
-            xml.writeAttribute(tr("DatePostupleniya"),datePostupleniya);
-            xml.writeAttribute(tr("DateUvolneniya"),dateUvolneniya);
-            xml.writeAttribute(tr("KodKarty"),kodKarty);
-
+            QFile file;
+            QXmlStreamWriter xml;
             if(allData){
-            queryAll = rrr->querySubObject("NewObject(QVariant &)",QVariant(tr("Query")));
-            queryAll->dynamicCall("Text", queryTextPassport.arg(kodSsylka));
-            resAll = queryAll->querySubObject("Execute()");
-            rowAll = resAll->querySubObject("Choose()");
-
-            if(rowAll->dynamicCall("Next()").toBool()){
-                xml.writeAttribute("PassportSeriya",rowAll->dynamicCall("PassportSeriya").toString().simplified());
-                xml.writeAttribute("PassportNomer",rowAll->dynamicCall("PassportNomer").toString().simplified());
-                xml.writeAttribute("PassportDataVidachi",rowAll->dynamicCall("PassportDataVidachi").toString());
-                xml.writeAttribute("KemVidan",rowAll->dynamicCall("KemVidan").toString().simplified());
+                file.setFileName("ObmenAll.xml");
+            }else{
+                file.setFileName("Obmen.xml");
             }
-            queryAll->clear();
-            delete queryAll;
-
-            queryAll = rrr->querySubObject("NewObject(QVariant &)",QVariant(tr("Query")));
-            queryAll->dynamicCall("Text", queryTextObrazovanie.arg(kodSsylka));
-            resAll = queryAll->querySubObject("Execute()");
-            rowAll = resAll->querySubObject("Choose()");
-            int number = 1;
-            QString tempString;
-            while(rowAll->dynamicCall("Next()").toBool()){
-
-                vidObrazovaniya = rowAll->dynamicCall("VidObrazovaniya").toString().simplified();
-                uchebnoeZavedenie = rowAll->dynamicCall("UchebnoeZavedenie").toString().simplified();
-                spezialnost = rowAll->dynamicCall("Spezialnost").toString().simplified();
-                diplom = rowAll->dynamicCall("Diplom").toString().simplified();
-                godOconchaniya = rowAll->dynamicCall("GodOconchaniya").toString();
-                kvalificaziya = rowAll->dynamicCall("Kvalificaziya").toString().simplified();
-
-                tempString = "VidObrazovaniya";
-                tempString += QString::number(number);
-                xml.writeAttribute(tempString,vidObrazovaniya);
-
-                tempString = "UchebnoeZavedenie";
-                tempString += QString::number(number);
-                xml.writeAttribute(tempString,uchebnoeZavedenie);
-
-                tempString = "Spezialnost";
-                tempString += QString::number(number);
-                xml.writeAttribute(tempString,spezialnost);
-
-                tempString = "Diplom";
-                tempString += QString::number(number);
-                xml.writeAttribute(tempString,diplom);
-
-                tempString = "GodOconchaniya";
-                tempString += QString::number(number);
-                xml.writeAttribute(tempString,godOconchaniya);
-
-                tempString = "Kvalificaziya";
-                tempString += QString::number(number);
-                xml.writeAttribute(tempString,kvalificaziya);
-
-                ++number;
+            if(file.exists()){
+                file.remove();
             }
-            queryAll->clear();
-            delete queryAll;
+            file.open(QIODevice::WriteOnly);
 
-            queryAll = rrr->querySubObject("NewObject(QVariant &)",QVariant(tr("Query")));
-            queryAll->dynamicCall("Text", queryTextPhone.arg(kodSsylka));
-            resAll = queryAll->querySubObject("Execute()");
-            rowAll = resAll->querySubObject("Choose()");
-            number = 1;
-            while(rowAll->dynamicCall("Next()").toBool()){
-                tephone = rowAll->dynamicCall("Tephone").toString().simplified();
+            xml.setDevice(&file);
+            xml.setAutoFormatting(true);
+            xml.writeStartDocument();
+            xml.writeStartElement(tr("FileExchange"));
+            xml.writeAttribute(tr("Date"),QDateTime::currentDateTime().toString("dd.MM.yyyy HH:mm:ss"));
+            xml.writeStartElement(tr("Employees"));
 
-                tempString = "Tephone";
-                tempString += QString::number(number);
-                xml.writeAttribute(tempString,tephone);
-                ++number;
-            }
-            queryAll->clear();
-            delete queryAll;
+            QString subName, postName, tabNumber, datePostupleniya, dateUvolneniya, grafikRabot, obosobl;
+            QString personName, dateName, kodSsylka, kodKarty, tephone;
+            QString vidObrazovaniya, uchebnoeZavedenie, spezialnost, diplom, godOconchaniya, kvalificaziya;
+            QString stepenRodstva,nameRodstva,dateRodstva;
 
-            queryAll = rrr->querySubObject("NewObject(QVariant &)",QVariant(tr("Query")));
-            queryAll->dynamicCall("Text", queryTextRodstva.arg(kodSsylka));
-            resAll = queryAll->querySubObject("Execute()");
-            rowAll = resAll->querySubObject("Choose()");
-            number = 1;
-            while(rowAll->dynamicCall("Next()").toBool()){
+            while(rowFizLiz->dynamicCall("Next()").toBool()){
+                if(rowFizLiz->dynamicCall("DeletionMark").toBool()){
+                    continue;
+                }
 
-                stepenRodstva = rowAll->dynamicCall("StepenRodstva").toString().simplified();
-                nameRodstva = rowAll->dynamicCall("NameRodstva").toString().simplified();
-                dateRodstva = rowAll->dynamicCall("BirthRodstva").toString();
+                personName = rowFizLiz->dynamicCall("FIO").toString().simplified();
+                dateName = rowFizLiz->dynamicCall("DataRozdeniya").toString();
+                kodSsylka = rowFizLiz->dynamicCall("Kod").toString();
+                subName = rowFizLiz->dynamicCall("Subdivision").toString().simplified();
+                postName = rowFizLiz->dynamicCall("Post").toString().simplified();
+                tabNumber = rowFizLiz->dynamicCall("TabelNumber").toString();
+                datePostupleniya = rowFizLiz->dynamicCall("DatePostupleniya").toString();
+                dateUvolneniya = rowFizLiz->dynamicCall("DateUvolneniya").toString();
+                grafikRabot = rowFizLiz->dynamicCall("GrafikRabot").toString().simplified();
+                obosobl = rowFizLiz->dynamicCall("Obosobl").toString().simplified();
+                kodKarty = rowFizLiz->dynamicCall("KodKarty").toString().simplified();
 
-                tempString = "StepenRodstva";
-                tempString += QString::number(number);
-                xml.writeAttribute(tempString,stepenRodstva);
+                xml.writeStartElement(tr("Element"));
+                xml.writeAttribute(tr("Employee"),personName);
+                xml.writeAttribute(tr("DataRozdeniya"),dateName);
+                xml.writeAttribute(tr("TabelNumber"),tabNumber);
+                xml.writeAttribute(tr("Subdivision"),subName);
+                xml.writeAttribute(tr("Post"),postName);
+                xml.writeAttribute(tr("Obosobl"),obosobl);
+                xml.writeAttribute(tr("DatePostupleniya"),datePostupleniya);
+                xml.writeAttribute(tr("DateUvolneniya"),dateUvolneniya);
+                xml.writeAttribute(tr("KodKarty"),kodKarty);
 
-                tempString = "NameRodstva";
-                tempString += QString::number(number);
-                xml.writeAttribute(tempString,nameRodstva);
+                if(allData){
+                    queryAll = rrr->querySubObject("NewObject(QVariant &)",QVariant(tr("Query")));
+                    queryAll->dynamicCall("Text", queryTextPassport.arg(kodSsylka));
+                    resAll = queryAll->querySubObject("Execute()");
+                    rowAll = resAll->querySubObject("Choose()");
 
-                tempString = "DateRodstva";
-                tempString += QString::number(number);
-                xml.writeAttribute(tempString,dateRodstva);
-                ++number;
-            }
-            queryAll->clear();
-            delete queryAll;
+                    if(rowAll->dynamicCall("Next()").toBool()){
+                        xml.writeAttribute("PassportSeriya",rowAll->dynamicCall("PassportSeriya").toString().simplified());
+                        xml.writeAttribute("PassportNomer",rowAll->dynamicCall("PassportNomer").toString().simplified());
+                        xml.writeAttribute("PassportDataVidachi",rowAll->dynamicCall("PassportDataVidachi").toString());
+                        xml.writeAttribute("KemVidan",rowAll->dynamicCall("KemVidan").toString().simplified());
+                    }
+                    queryAll->clear();
+                    delete queryAll;
 
-            queryAll = rrr->querySubObject("NewObject(QVariant &)",QVariant(tr("Query")));
-            queryAll->dynamicCall("Text", queryTextMedosmotr.arg(kodSsylka));
-            resAll = queryAll->querySubObject("Execute()");
-            rowAll = resAll->querySubObject("Choose()");
-            number = 1;
-            while(rowAll->dynamicCall("Next()").toBool()){
+                    queryAll = rrr->querySubObject("NewObject(QVariant &)",QVariant(tr("Query")));
+                    queryAll->dynamicCall("Text", queryTextObrazovanie.arg(kodSsylka));
+                    resAll = queryAll->querySubObject("Execute()");
+                    rowAll = resAll->querySubObject("Choose()");
+                    int number = 1;
+                    QString tempString;
+                    while(rowAll->dynamicCall("Next()").toBool()){
 
-                xml.writeAttribute("mNomerSpravki",rowAll->dynamicCall("NomerSpravki").toString().simplified());
-                xml.writeAttribute("mGoden",rowAll->dynamicCall("Goden").toString().simplified());
-                xml.writeAttribute("mDataProhojdeniya",rowAll->dynamicCall("DataProhojdeniya").toString());
-                xml.writeAttribute("mNomerDocumenta",rowAll->dynamicCall("NomerDocumenta").toString());
-                xml.writeAttribute("mProyden",rowAll->dynamicCall("Proyden").toString());
-                xml.writeAttribute("mData",rowAll->dynamicCall("Data").toString());
-            }
-            queryAll->clear();
-            delete queryAll;
+                        vidObrazovaniya = rowAll->dynamicCall("VidObrazovaniya").toString().simplified();
+                        uchebnoeZavedenie = rowAll->dynamicCall("UchebnoeZavedenie").toString().simplified();
+                        spezialnost = rowAll->dynamicCall("Spezialnost").toString().simplified();
+                        diplom = rowAll->dynamicCall("Diplom").toString().simplified();
+                        godOconchaniya = rowAll->dynamicCall("GodOconchaniya").toString();
+                        kvalificaziya = rowAll->dynamicCall("Kvalificaziya").toString().simplified();
+
+                        tempString = "VidObrazovaniya";
+                        tempString += QString::number(number);
+                        xml.writeAttribute(tempString,vidObrazovaniya);
+
+                        tempString = "UchebnoeZavedenie";
+                        tempString += QString::number(number);
+                        xml.writeAttribute(tempString,uchebnoeZavedenie);
+
+                        tempString = "Spezialnost";
+                        tempString += QString::number(number);
+                        xml.writeAttribute(tempString,spezialnost);
+
+                        tempString = "Diplom";
+                        tempString += QString::number(number);
+                        xml.writeAttribute(tempString,diplom);
+
+                        tempString = "GodOconchaniya";
+                        tempString += QString::number(number);
+                        xml.writeAttribute(tempString,godOconchaniya);
+
+                        tempString = "Kvalificaziya";
+                        tempString += QString::number(number);
+                        xml.writeAttribute(tempString,kvalificaziya);
+
+                        ++number;
+                    }
+                    queryAll->clear();
+                    delete queryAll;
+
+                    queryAll = rrr->querySubObject("NewObject(QVariant &)",QVariant(tr("Query")));
+                    queryAll->dynamicCall("Text", queryTextPhone.arg(kodSsylka));
+                    resAll = queryAll->querySubObject("Execute()");
+                    rowAll = resAll->querySubObject("Choose()");
+                    number = 1;
+                    while(rowAll->dynamicCall("Next()").toBool()){
+                        tephone = rowAll->dynamicCall("Tephone").toString().simplified();
+
+                        tempString = "Tephone";
+                        tempString += QString::number(number);
+                        xml.writeAttribute(tempString,tephone);
+                        ++number;
+                    }
+                    queryAll->clear();
+                    delete queryAll;
+
+                    queryAll = rrr->querySubObject("NewObject(QVariant &)",QVariant(tr("Query")));
+                    queryAll->dynamicCall("Text", queryTextRodstva.arg(kodSsylka));
+                    resAll = queryAll->querySubObject("Execute()");
+                    rowAll = resAll->querySubObject("Choose()");
+                    number = 1;
+                    while(rowAll->dynamicCall("Next()").toBool()){
+
+                        stepenRodstva = rowAll->dynamicCall("StepenRodstva").toString().simplified();
+                        nameRodstva = rowAll->dynamicCall("NameRodstva").toString().simplified();
+                        dateRodstva = rowAll->dynamicCall("BirthRodstva").toString();
+
+                        tempString = "StepenRodstva";
+                        tempString += QString::number(number);
+                        xml.writeAttribute(tempString,stepenRodstva);
+
+                        tempString = "NameRodstva";
+                        tempString += QString::number(number);
+                        xml.writeAttribute(tempString,nameRodstva);
+
+                        tempString = "DateRodstva";
+                        tempString += QString::number(number);
+                        xml.writeAttribute(tempString,dateRodstva);
+                        ++number;
+                    }
+                    queryAll->clear();
+                    delete queryAll;
+
+                    queryAll = rrr->querySubObject("NewObject(QVariant &)",QVariant(tr("Query")));
+                    queryAll->dynamicCall("Text", queryTextMedosmotr.arg(kodSsylka));
+                    resAll = queryAll->querySubObject("Execute()");
+                    rowAll = resAll->querySubObject("Choose()");
+                    number = 1;
+                    while(rowAll->dynamicCall("Next()").toBool()){
+
+                        xml.writeAttribute("mNomerSpravki",rowAll->dynamicCall("NomerSpravki").toString().simplified());
+                        xml.writeAttribute("mGoden",rowAll->dynamicCall("Goden").toString().simplified());
+                        xml.writeAttribute("mDataProhojdeniya",rowAll->dynamicCall("DataProhojdeniya").toString());
+                        xml.writeAttribute("mNomerDocumenta",rowAll->dynamicCall("NomerDocumenta").toString());
+                        xml.writeAttribute("mProyden",rowAll->dynamicCall("Proyden").toString());
+                        xml.writeAttribute("mData",rowAll->dynamicCall("Data").toString());
+                    }
+                    queryAll->clear();
+                    delete queryAll;
+                }
+
+                xml.writeEndElement();
             }
 
             xml.writeEndElement();
-        }
+            xml.writeEndDocument();
 
-        xml.writeEndElement();
-        xml.writeEndDocument();
-
-        file.close();
-        QFile fileOut;
-        fileOut.setFileName(file.fileName());
-        fileOut.open(QIODevice::ReadOnly);
-        QByteArray byteArray = fileOut.readAll();
-        if(byteArray.isEmpty()){
-            QTextStream ocout(stdout);
-            ocout << fileOut.errorString();
-//            QMessageBox::warning(this,"Attention!!!",);
-        }
+            file.close();
+            QFile fileOut;
+            fileOut.setFileName(file.fileName());
+            fileOut.open(QIODevice::ReadOnly);
+            QByteArray byteArray = fileOut.readAll();
+            if(byteArray.isEmpty()){
+                QTextStream ocout(stdout);
+                ocout << fileOut.errorString();
+            }
 
 
-        QByteArray compressData = qCompress(byteArray);
-        QFile compressFile;
-        QFileInfo fileInfo;
-        fileInfo.setFile(file.fileName());
-        QString fN = fileInfo.baseName();
-        fN += ".arh";
-        compressFile.setFileName(fN);
-        compressFile.open(QIODevice::WriteOnly);
-        compressFile.write(compressData);
+            QByteArray compressData = qCompress(byteArray);
+            QFile compressFile;
+            QFileInfo fileInfo;
+            fileInfo.setFile(file.fileName());
+            QString fN = fileInfo.baseName();
+            fN += ".arh";
+            compressFile.setFileName(fN);
+            compressFile.open(QIODevice::WriteOnly);
+            compressFile.write(compressData);
 
-        fileOut.close();
-//        //file.remove();
+            fileOut.close();
+            compressFile.close();
 
-        compressFile.close();
-
-        //QFile fileOut("./Obmen.rar");
-   //fileOut.open(QIODevice::ReadOnly);
-        //QByteArray bb = file.readAll();
-        //QFile fO("./OO.xml");
-        //fO.open(QIODevice::WriteOnly);
-        //fO.write(qUncompress(bb));
-
-        //fileOut.close();
-        //fO.close();
-        //while(compressFile->isOpen());
-
-        excel->clear();
-        excel->~QAxObject();
-
-        PutFtp putFtp;
-        qDebug()<<compressFile.fileName()<<", "<<QTime::currentTime();
-        putFtp.putFile(compressFile.fileName());
-    }else{
             excel->clear();
             excel->~QAxObject();
-        QTextStream ocout(stdout);
-        ocout << "Don't create COM connector...";
 
-    }
+            PutFtp putFtp;
+            qDebug()<<compressFile.fileName()<<", "<<QTime::currentTime();
+            putFtp.putFile(compressFile.fileName());
+        }else{
+            excel->clear();
+            excel->~QAxObject();
+            QTextStream ocout(stdout);
+            ocout << "Don't create COM connector...\n";
+        }
     }
 }
 

@@ -1,24 +1,18 @@
-#include <QtWidgets>
-#include "mainwindow.h"
-#include "databasedirection.h"
+#include <QCoreApplication>
+#include "timeupdate.h"
 #include "update.h"
 #include <cstdlib>
+#include "myservice.h"
 
 int main(int argc, char *argv[])
 {
-    QApplication app(argc, argv);
+    QCoreApplication app(argc, argv);
+    //MyService service(argc, argv);
 
-    QTranslator translator;
-    if(translator.load("ServerEmployee_ru.qm"))
-        app.installTranslator(&translator);
+    Update upDate;
+    upDate.iniVersion();
 
-    QApplication::setQuitOnLastWindowClosed(false);
+    TimeUpdate timeUpdate;
 
-    Update update;
-    update.iniVersion();
-
-    MainWindow mW;
-    mW.show();
-    
     return app.exec();
 }

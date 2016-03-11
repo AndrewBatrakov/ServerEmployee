@@ -16,15 +16,17 @@ CONFIG += console
 
 TEMPLATE = app
 
-
-SOURCES += main.cpp\
-        mainwindow.cpp \
-
-HEADERS  += mainwindow.h \
-
 include(Services.pri)
+include(common.pri)
+include(qtservice.pri)
 
-RESOURCES += \
-    icons.qrc
+RESOURCES +=
 
 RC_FILE = ServerEmployee.rc
+
+HEADERS += \
+    myservice.h
+
+SOURCES += \
+    myservice.cpp \
+    main.cpp

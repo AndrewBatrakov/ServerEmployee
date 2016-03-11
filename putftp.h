@@ -1,10 +1,9 @@
 #ifndef PUTFTP_H
 #define PUTFTP_H
 
-#include <QtWidgets>
 #include <QtNetwork>
 
-class PutFtp : public QDialog
+class PutFtp : public QObject
 {
     Q_OBJECT
 public:
@@ -13,12 +12,8 @@ public:
 public slots:
     void putFile(QString);
 
-private slots:
-    void updateDataTransferProgress(qint64, qint64);
-
 private:
     QFile *filePut;
-    QProgressDialog *progressDialog;
     QNetworkAccessManager *manager;
     QNetworkReply *reply;
     QUrl url;

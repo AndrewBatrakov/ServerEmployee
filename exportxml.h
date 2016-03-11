@@ -1,17 +1,8 @@
 #ifndef EXPORTXML_H
 #define EXPORTXML_H
 
-#include <QtWidgets>
 #include <QAxObject>
 #include <QtNetwork>
-
-class QLabel;
-class LineEdit;
-class QDialogButtonBox;
-class QComboBox;
-class QDateEdit;
-class QTableView;
-class QAxObject;
 
 class ExportXML : public QObject
 {
