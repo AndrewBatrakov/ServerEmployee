@@ -8,6 +8,7 @@ class PutFtp : public QObject
     Q_OBJECT
 public:
     PutFtp();
+    ~PutFtp();
 
 public slots:
     void putFile(QString);

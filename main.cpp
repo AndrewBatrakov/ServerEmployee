@@ -1,13 +1,12 @@
-#include <QCoreApplication>
+#include <QApplication>
 #include "timeupdate.h"
 #include "update.h"
 #include <cstdlib>
-#include "myservice.h"
+#include "qaxobject.h"
 
 int main(int argc, char *argv[])
 {
-    QCoreApplication app(argc, argv);
-    //MyService service(argc, argv);
+    QApplication app(argc, argv);
 
     Update upDate;
     upDate.iniVersion();

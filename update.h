@@ -9,6 +9,7 @@ class Update : public QObject
     Q_OBJECT
 public:
     Update();
+    ~Update();
 
 public slots:
     void iniVersion();

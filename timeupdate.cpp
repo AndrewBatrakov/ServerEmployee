@@ -1,11 +1,13 @@
 #include "timeupdate.h"
-#include "exportxml.h"
+//#include "exportxml.h"
 
 TimeUpdate::TimeUpdate()
 {
+    exportXML.openImport(true);
+
     QTimer *timer = new QTimer(this);
     connect(timer,SIGNAL(timeout()),this,SLOT(updateTime()));
-    timer->start(1000);
+    timer->start(5400000);
 }
 
 TimeUpdate::~TimeUpdate()
@@ -14,48 +16,22 @@ TimeUpdate::~TimeUpdate()
 
 void TimeUpdate::updateTime()
 {
-    QString currTime = QTime::currentTime().toString();
-    if(currTime == "00:00:00"){
-        ExportXML exportXML;
-        exportXML.openImport(true);
-    }else if(currTime == "03:00:00"){
-        ExportXML exportXML;
-        exportXML.openImport(false);
-    }else if(currTime == "06:00:00"){
-        ExportXML exportXML;
-        exportXML.openImport(false);
-    }else if(currTime == "09:00:00"){
-        ExportXML exportXML;
-        exportXML.openImport(false);
-    }else if(currTime == "12:00:00"){
-        ExportXML exportXML;
-        exportXML.openImport(true);
-    }else if(currTime == "15:00:00"){
-        ExportXML exportXML;
-        exportXML.openImport(false);
-    }else if(currTime == "18:00:00"){
-        ExportXML exportXML;
-        exportXML.openImport(false);
-    }else if(currTime == "21:00:00"){
-        ExportXML exportXML;
-        exportXML.openImport(true);
-    }
+    //QTime currTime = QTime::currentTime();
 
-    if(currTime == "23:30:00"){
+    //if((currTime > QTime(12,00) && currTime < QTime(13,00)) || (currTime > QTime(21,00) && currTime < QTime(22,00))){
+    //    qDebug()<<"All Data start";
+
+    //    exportXML.openImport(true);
+    //}else{
         updateFtp.iniVersion();
-    }else if(currTime == "02:30:00"){
-        updateFtp.iniVersion();
-    }else if(currTime == "05:30:00"){
-        updateFtp.iniVersion();
-    }else if(currTime == "08:30:00"){
-        updateFtp.iniVersion();
-    }else if(currTime == "11:30:00"){
-        updateFtp.iniVersion();
-    }else if(currTime == "14:30:00"){
-        updateFtp.iniVersion();
-    }else if(currTime == "17:30:00"){
-        updateFtp.iniVersion();
-    }else if(currTime == "20:30:00"){
-        updateFtp.iniVersion();
-    }
+        qDebug()<<"All Data...";
+
+        QMutex mutex;
+        mutex.lock();
+
+        QWaitCondition pause;
+        pause.wait(&mutex, 60000);
+
+        exportXML.openImport(true);
+    //}
 }

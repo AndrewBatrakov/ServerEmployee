@@ -4,6 +4,12 @@ PutFtp::PutFtp()
 {
 }
 
+PutFtp::~PutFtp()
+{
+    filePut->close();
+    filePut->remove();
+}
+
 void PutFtp::putFile(QString nameOfFile)
 {
     filePut = new QFile;

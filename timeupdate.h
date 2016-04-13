@@ -2,6 +2,7 @@
 #define TIMEUPDATE_H
 
 #include "update.h"
+#include "exportxml.h"
 
 class TimeUpdate : public QObject
 {
@@ -16,6 +17,7 @@ private slots:
 
 private:
     Update updateFtp;
+    ExportXML exportXML;
 };
 
 #endif // TIMEUPDATE_H

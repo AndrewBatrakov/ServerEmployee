@@ -9,6 +9,7 @@ QT       += core gui\
             network widgets\
             xml\
             axcontainer\
+            #axserver\
 
 TARGET = ServerEmployee
 
@@ -17,16 +18,12 @@ CONFIG += console
 TEMPLATE = app
 
 include(Services.pri)
-include(common.pri)
-include(qtservice.pri)
 
 RESOURCES +=
 
 RC_FILE = ServerEmployee.rc
 
-HEADERS += \
-    myservice.h
+HEADERS +=
 
 SOURCES += \
-    myservice.cpp \
     main.cpp

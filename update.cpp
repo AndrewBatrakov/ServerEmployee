@@ -4,12 +4,22 @@ Update::Update()
 {
 }
 
+Update::~Update()
+{
+    replyExe->deleteLater();
+    replyIni->deleteLater();
+    httpExe.deleteLater();
+    httpIni.deleteLater();
+}
+
 void Update::iniVersion()
 {
     QString localFileName = "ServerEmployeeHttpFromSite.ini";
     fileHttpIni = new QFile;
     fileHttpIni->setFileName(localFileName);
-    fileHttpIni->open(QIODevice::WriteOnly);
+    if(!fileHttpIni->open(QIODevice::WriteOnly)){
+        qDebug()<<"Don't open ServerEmployeeHttpFromSite.ini";
+    }
 
     url = "http://91.102.219.74/QtProject/ServerEmployee/ServerEmployee.ini";
     replyIni = httpIni.get(QNetworkRequest(url));
@@ -19,6 +29,10 @@ void Update::iniVersion()
 
 bool Update::newVersion()
 {
+    QFile renFile;
+    renFile.setFileName("./ServerEmployee.exe.bak");
+    renFile.remove();
+
     bool resultUpdates = false;
     QSettings settings("ServerEmployeeHttpFromSite.ini",QSettings::IniFormat);
     QString iniVersion = settings.value("Version").toString();
@@ -34,6 +48,7 @@ bool Update::newVersion()
             resultUpdates = true;
             exeVersion();
     }
+    fileHttpIni->remove();
     return resultUpdates;
 }
 
@@ -43,20 +58,10 @@ void Update::exeVersion()
     fileHttpExe = new QFile(localFileName1);
     fileHttpExe->open(QIODevice::ReadWrite);
 
-    QFile renFile;
-    renFile.setFileName("./ServerEmployee.exe.bak");
-    if(renFile.exists()){
-        renFile.remove();
-    }
     QFile fileR;
     fileR.setFileName("./ServerEmployee.exe");
     fileR.rename("./ServerEmployee.exe.bak");
     fileR.close();
-
-//    QFile fileRe;
-//    fileRe.setFileName("./ServerEmployeeHttpFromSite.ini");
-//    fileRe.remove();
-
 
     url = "http://91.102.219.74/QtProject/ServerEmployee/ServerEmployee.exe";
     replyExe = httpExe.get(QNetworkRequest(url));
@@ -67,8 +72,6 @@ void Update::exeVersion()
 
 void Update::httpDoneIni()
 {
-    fileHttpIni->close();
-    fileHttpIni->remove();
     newVersion();
 }
 
@@ -86,14 +89,18 @@ void Update::closeConnection()
 
 void Update::restartProgramm()
 {
-    QProcess::startDetached("ServerEmployee.exe");
+    QProcess *stProcess = new QProcess(this);
+    stProcess->startDetached("ServerEmployee.exe");
     emit qApp->quit();
 }
 
 void Update::httpReadyReadIni()
 {
-    if (fileHttpIni)
+    if(fileHttpIni){
         fileHttpIni->write(replyIni->readAll());
+    }
+    fileHttpIni->close();
+
 }
 
 void Update::httpReadyReadExe()

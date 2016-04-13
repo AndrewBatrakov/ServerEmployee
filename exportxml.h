@@ -9,12 +9,14 @@ class ExportXML : public QObject
     Q_OBJECT
 
 public:
-    ExportXML(QObject *parent = 0);
+    ExportXML();
+    ~ExportXML();
 
     QAxObject *excel;
     QAxObject *queryAll;
     QAxObject *rowAll;
     QAxObject *resAll;
+    QAxObject *rrr;
 
 public slots:
     void openImport(bool);
