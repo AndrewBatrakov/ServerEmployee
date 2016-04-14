@@ -13,7 +13,7 @@ ExportXML::~ExportXML()
 void ExportXML::openImport(bool allData)
 {
     excel = new QAxObject("v83.ComConnector",0);
-    if(excel){
+    if(!excel){
         return;
     }
     queryAll = new QAxObject;
@@ -173,19 +173,16 @@ void ExportXML::openImport(bool allData)
     text = ("ВЫБРАТЬ ПЕРВЫЕ 1 "
             "СИТ_АРМ_ТалонПожарноТехническогоМинимума.Номер КАК ptmUdNumber, "
             "СИТ_АРМ_ТалонПожарноТехническогоМинимума.Дата КАК ptmUdData, "
-            "СИТ_АРМ_ПротоколПроверкиЗнанийПожарноТехническогоМинимума.Номер КАК ptmNumber, "
-            "СИТ_АРМ_ПротоколПроверкиЗнанийПожарноТехническогоМинимума.Дата КАК ptmDate, "
-            "СИТ_АРМ_ПротоколПроверкиЗнанийПожарноТехническогоМинимума.ОбъемЧасов КАК ptmObChasov, "
-            "СИТ_АРМ_ПротоколПроверкиЗнанийПожарноТехническогоМинимума.ПрограммаОбучения.Наименование КАК ptmProgramma, "
-            "СИТ_АРМ_ПротоколПроверкиЗнанийПожарноТехническогоМинимума.КраткийСоставДокумента КАК ptmSostav "
+            "СИТ_АРМ_ТалонПожарноТехническогоМинимума.Протокол.Номер КАК ptmNumber, "
+            "СИТ_АРМ_ТалонПожарноТехническогоМинимума.Протокол.Дата КАК ptmDate, "
+            "СИТ_АРМ_ТалонПожарноТехническогоМинимума.Протокол.ОбъемЧасов КАК ptmObChasov, "
+            "СИТ_АРМ_ТалонПожарноТехническогоМинимума.Протокол.ПрограммаОбучения.Наименование КАК ptmProgramma, "
+            "СИТ_АРМ_ТалонПожарноТехническогоМинимума.Протокол.КраткийСоставДокумента КАК ptmSostav "
             "ИЗ "
             "Документ.СИТ_АРМ_ТалонПожарноТехническогоМинимума КАК СИТ_АРМ_ТалонПожарноТехническогоМинимума "
-            "ЛЕВОЕ СОЕДИНЕНИЕ Документ.СИТ_АРМ_ПротоколПроверкиЗнанийПожарноТехническогоМинимума КАК СИТ_АРМ_ПротоколПроверкиЗнанийПожарноТехническогоМинимума "
-            "ПО СИТ_АРМ_ТалонПожарноТехническогоМинимума.Протокол = СИТ_АРМ_ПротоколПроверкиЗнанийПожарноТехническогоМинимума.Ссылка "
             "ГДЕ "
             "СИТ_АРМ_ТалонПожарноТехническогоМинимума.Сотрудник.Код = \"%1\" "
             "УПОРЯДОЧИТЬ ПО "
-            "СИТ_АРМ_ПротоколПроверкиЗнанийПожарноТехническогоМинимума.Дата "
             "ptmNumber УБЫВ");
 
     queryTextPTM = codecTr->toUnicode(text);
@@ -229,7 +226,7 @@ void ExportXML::openImport(bool allData)
     queryOstatkiSIZ = codecTr->toUnicode(text);
 
     QAxObject *rrr = excel->querySubObject("Connect(QVariant &)", QVariant("Srvr=\"rif-1c\";Ref=\"1c_zupkorp\";Usr=\"ManilchukNM\";Pwd=\"1Q34WER\""));
-    if(rrr){
+    if(!rrr){
         return;
     }
     QAxObject *queryFizLiz;
@@ -237,16 +234,16 @@ void ExportXML::openImport(bool allData)
     QAxObject *rowFizLiz;
 
     queryFizLiz = rrr->querySubObject("NewObject(QVariant &)",QVariant(tr("Query")));
-    if(queryFizLiz){
+    if(!queryFizLiz){
         return;
     }
     queryFizLiz->dynamicCall("Text", queryTextFizLiz);
     resFizLiz = queryFizLiz->querySubObject("Execute()");
-    if(resFizLiz){
+    if(!resFizLiz){
         return;
     }
     rowFizLiz = resFizLiz->querySubObject("Choose()");
-    if(rowFizLiz){
+    if(!rowFizLiz){
         return;
     }
 
