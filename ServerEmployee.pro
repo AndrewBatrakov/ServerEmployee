@@ -13,7 +13,8 @@ QT       += core gui\
 
 TARGET = ServerEmployee
 
-CONFIG += console
+CONFIG +=   console\
+            exception\
 
 TEMPLATE = app
 

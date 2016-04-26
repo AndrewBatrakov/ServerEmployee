@@ -23,6 +23,11 @@ public slots:
 
 private slots:
     QString convertStToDate(QString);
+
+private:
+    QUrl url;
+    QNetworkAccessManager httpIni;
+    QNetworkReply *replyIni;
 };
 
 #endif // ONECIMPORT_H
